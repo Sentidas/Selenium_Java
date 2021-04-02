@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 
 
-public class TestInsurance extends BaseTest  {
+/*public class TestInsurance extends BaseTest  {
 
     @Test
     public void testInsurance() throws Exception {
@@ -70,4 +70,4 @@ public class TestInsurance extends BaseTest  {
         sendAppPage.checkFieldErrorMessage("xp", "При заполнении данных произошла ошибка");
 
     }
-}
+}*/

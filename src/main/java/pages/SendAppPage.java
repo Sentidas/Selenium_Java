@@ -1,19 +1,14 @@
 
 package pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import static org.junit.Assert.assertEquals;
-
 
 public class SendAppPage extends BasePage {
 
@@ -27,6 +22,9 @@ public class SendAppPage extends BasePage {
     @FindBy(id = "person_middleName")
     WebElement middleName;
 
+    @FindBy(xpath = "//span[@class = 'checkbox']")
+    WebElement noMiddleName;
+
     @FindBy(id = "passportSeries")
     WebElement passportSeries;
 
@@ -36,11 +34,13 @@ public class SendAppPage extends BasePage {
     @FindBy(id = "documentIssue")
     WebElement documentIssue;
 
+    @FindBy(id = "name_vzr_ins_0")
+    WebElement nameIns;
+
     @FindBy(id = "surname_vzr_ins_0")
     WebElement surnameIns;
 
-    @FindBy(id = "name_vzr_ins_0")
-    WebElement nameIns;
+
 
     @FindBy(id = "birthDate_vzr_ins_0")
     WebElement birthDateIns;
@@ -61,6 +61,11 @@ public class SendAppPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Продолжить')]")
     public WebElement sendButton;
 
+    public WebElement getSendButton() {
+        return sendButton;
+    }
+
+
     public SendAppPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -71,27 +76,28 @@ public class SendAppPage extends BasePage {
             case  "Фамилия застрахованного":
                 fillField(surnameIns, value);
                 break;
-            case  "Имя застрахованного":
+            case  "Имя":
                 fillField(nameIns, value);
-                break;
-            case  "Дата рождения застрахованного":
-                fillField(birthDateIns, value);
-                break;
-            case  "Фамилия страхователя":
-                fillField(lastName, value);
                 break;
             case  "Имя страхователя":
                 fillField(firstName, value);
                 break;
+            case  "Дата рождения застрахованного":
+                fillField(birthDateIns, value);
+                break;
             case  "Отчество страхователя":
                 fillField(middleName, value);
                 break;
+
+          // case  "Отчество отсутствует":
+           //     driver.findElement(By.xpath("//span[@class = 'checkbox']")).click();
+            //   break;
             case  "Дата рождения страхователя":
                 fillField(birthDate, value);
                 break;
-            case  "Пол":
-                driver.findElement(By.xpath("//label[contains(text(), 'Женский')]")).click();
-                break;
+            //case  "Пол":
+               // driver.findElement(By.xpath("//label[contains(text(), 'Женский')]")).click();
+               // break;
             case  "Серия паспорта":
                 fillField(passportSeries, value);
                 break;
@@ -101,9 +107,13 @@ public class SendAppPage extends BasePage {
             case  "Когда выдан":
                 fillField(documentDate, value);
                 break;
+            case  "Фамилия страхователя":
+                fillField(lastName, value);
+                break;
             case  "Кем выдан":
                 fillField(documentIssue, value);
                 break;
+
 
             default:  throw new AssertionError("Поле '"+fieldName+"' не объявлено на странице");
         }
@@ -113,28 +123,31 @@ public class SendAppPage extends BasePage {
         switch (fieldName){
             case  "Фамилия застрахованного":
                 return surnameIns.getAttribute("value");
-            case  "Имя застрахованного":
+            case  "Имя":
                 return nameIns.getAttribute("value");
             case  "Дата рождения застрахованного":
                 return birthDateIns.getAttribute("value");
-            case  "Фамилия страхователя":
-                return lastName.getAttribute("value");
+
             case  "Имя страхователя":
                 return firstName.getAttribute("value");
-            case  "Отчество страхователя":
-                return middleName.getAttribute("value");
+
             case  "Дата рождения страхователя":
                 return birthDate.getAttribute("value");
-            case  "Пол":
-                return sexWoman.getAttribute("class");
+            case  "Отчество страхователя":
+                return middleName.getAttribute("value");
+           // case  "Пол":
+            //    return sexWoman.getAttribute("class");
             case  "Серия паспорта":
                 return passportSeries.getAttribute("value");
             case  "Номер паспорта":
                 return passportNumber.getAttribute("value");
+            case  "Фамилия страхователя":
+                return lastName.getAttribute("value");
             case  "Когда выдан":
                 return documentDate.getAttribute("value");
             case  "Кем выдан":
                 return documentIssue.getAttribute("value");
+
         }
         throw new AssertionError("Поле не объявлено на странице");
     }

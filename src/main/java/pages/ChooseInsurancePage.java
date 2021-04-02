@@ -22,6 +22,21 @@ public class ChooseInsurancePage extends BasePage {
 
 
     public void selectButton(String itemName) {
-        driver.findElement(By.xpath("//*[contains(text(),'" + itemName + "')]")).click();
+        Wait<WebDriver> wait4 = new WebDriverWait(driver, 5, 1000);
+        wait4.until(ExpectedConditions.visibilityOf(
+          driver.findElement(By.xpath("//button[contains(text(),'" + itemName + "')]"))));
+      driver.findElement(By.xpath("//button[contains(text(), '" + itemName + "')]")).click();
+
+
+     //   driver.findElement(By.xpath("//button[@class ='btn btn-primary btn-large']"))));
+      //  driver.findElement(By.xpath("//button[@class ='btn btn-primary btn-large']")).click();
     }
+
+    /*public void selectButton2(String itemName) {
+        Wait<WebDriver> wait4 = new WebDriverWait(driver, 5, 1000);
+        wait4.until(ExpectedConditions.visibilityOf(
+                driver.findElement(By.xpath("//button[@class ='btn btn-primary btn-large']"))));
+        driver.findElement(By.xpath("//button[@class ='btn btn-primary btn-large']")).click();
+        //driver.findElement(By.xpath("//button[text() ='" + itemName + "')]")).click();
+    }*/
 }
